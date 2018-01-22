@@ -10,7 +10,7 @@ class People extends Component {
   constructor(props){
     super(props);
       this.state = {
-        todos: TodoStore.getAll(),
+        people: TodoStore.getAll(),
       };
       this.getTodos = this.getTodos.bind(this);
   }
@@ -28,15 +28,16 @@ class People extends Component {
   }
 
   render() {
-    const { todos } = this.state;
-    const TodoComponents = todos.map((todo) => {
-      return <p key={todo.id}>{todo.text}</p>
+    const { people } = this.state;
+    const TodoComponents = people.map((person) => {
+      return <p key={person.id} className="people-option">
+        {person.name} - {person.country} - {person.birthYear}</p>
     })
     return (
       <div className="people-box">
         <div style={{background: "#fff", borderRadius: "6px", height: "254px"}}>
           Visitantes Anteriores
-          <p>Mariano - Argentina - 01/01/1984</p>
+          <p className="people-option">Mariano - Argentina - 01/01/1984</p>
           <p>Mariano - Argentina - 01/01/1984</p>
           <p>Mariano - Argentina - 01/01/1984</p>
           <hr />

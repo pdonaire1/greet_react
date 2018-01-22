@@ -4,6 +4,7 @@ Ing. Pablo Alejandro González Donaire
 */
 import React, { Component } from 'react';
 // import logo from './logo.svg';
+// import '../App.css';
 import {
   Grid,
   Row,
@@ -11,8 +12,8 @@ import {
 } from 'react-bootstrap'
 import People from "./components/people"
 import PersonForm from "./components/person_form"
-import './App.css';
-import './assets/styles/base.scss';
+const css = require('../App.css');
+const scss = require('../assets/styles/base.scss');
 
 class App extends Component {
   constructor(props){
@@ -55,7 +56,7 @@ class App extends Component {
 }
 
 import ReactDOM from 'react-dom';
-import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from '../registerServiceWorker';
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
 

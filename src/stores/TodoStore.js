@@ -3,18 +3,7 @@ import dispatcher from "../dispatcher"
 class TodoStore extends EventEmitter {
   constructor(){
     super();
-    this.todos = [
-      {
-        id:1,
-        text: "text one",
-        complete: false
-      },
-      {
-        id:2,
-        text: "text two",
-        complete: false
-      },
-    ]
+    this.people = []
     this.countries = [
       {name: "Argentina", id: 1},
       {name: "Venezuela", id: 2},
@@ -23,25 +12,22 @@ class TodoStore extends EventEmitter {
   }
 
   getAll(){
-    return this.todos;
+    return this.people;
   }
   getCountries(){
     return this.countries;
   }
-  createGreet(text){
+  createGreet(value){
+    console.log("text: ", value)
     const id = Date.now();
-    this.todos.push({
-      id,
-      text,
-      complete: false,
-    });
+    this.people.push(value);
     this.emit("change");
   }
   handleActions(action){
     console.log("TodoStore recieve an action", action);
     switch(action.type){
       case "CREATE_GREET":{
-        this.createGreet(action.text);
+        this.createGreet(action.value);
       }
       case "GET_COUNTRIES": {
         this.getCountries()

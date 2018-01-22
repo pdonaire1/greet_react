@@ -22,6 +22,7 @@ class PersonForm extends Component{
       birthYear: '',
       day: '',
       month: '',
+      person_id: 0,
       future_year: '',
       saved: false
     };
@@ -30,6 +31,7 @@ class PersonForm extends Component{
     this.handleCountryChange = this.handleCountryChange.bind(this);
     this.handleBirthYearChange = this.handleBirthYearChange.bind(this);
     this.renderCountrySelect = this.renderCountrySelect.bind(this);
+    this.resetForm = this.resetForm.bind(this);
   }
 
   handleNameChange(event){
@@ -41,9 +43,23 @@ class PersonForm extends Component{
   handleBirthYearChange(event){
     this.setState({birthYear: event.target.value, saved: false});
   }
+  resetForm(){
+    this.setState({
+      name: '',
+      country: '',
+      birthYear: ''
+    });
+  }
   createGreet(){
-    this.setState({saved: true});
-    GreetActions.createGreet();
+    this.setState({saved: true, person_id: this.state.person_id + 1});
+    var userData = {
+      id: this.state.person_id,
+      name: this.state.name,
+      country: this.state.country,
+      birthYear: this.state.birthYear
+    }
+    GreetActions.createGreet(userData);
+    this.resetForm();
   }
   renderCountrySelect(){
 

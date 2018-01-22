@@ -1,9 +1,9 @@
 import dispatcher from "../dispatcher";
 
-export function createGreet(text){
+export function createGreet(value){
   dispatcher.dispatch({
     type: "CREATE_GREET",
-    text,
+    value,
   });
 }
 
