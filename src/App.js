@@ -10,7 +10,8 @@ import {
   Row,
   Col,
 } from 'react-bootstrap'
-
+import People from "./components/people"
+import PersonForm from "./components/person_form"
 
 class App extends Component {
   constructor(props){
@@ -31,7 +32,7 @@ class App extends Component {
           <Row>
             <Col>
               <p className="App-intro">
-              Ejercicio intive
+              Ejercicio invite
               </p>
               <p>Nombre: {this.state.name}</p>
             </Col>
@@ -39,8 +40,10 @@ class App extends Component {
           <form>
             <Row>
               <Col xs={12} md={6}>
+                <PersonForm />
               </Col>
               <Col xs={12} md={6}>
+                <People></People>
               </Col>
             </Row>
           </form>
