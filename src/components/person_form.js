@@ -9,7 +9,7 @@ import {
   ControlLabel,
   Button
 } from 'react-bootstrap'
-import TodoStore from "../stores/TodoStore";
+import PeopleStore from "../stores/PeopleStore";
 import * as GreetActions from "../actions/GreetActions";
 import Greet from "./greet";
 
@@ -57,19 +57,19 @@ class PersonForm extends Component{
     });
   }
   componentWillMount(){
-    TodoStore.getCountries().then((response)=>{
+    PeopleStore.getCountries().then((response)=>{
       this.setState({countries: response})
     });
-    TodoStore.on("change", this.getCurrentPerson);
+    PeopleStore.on("change", this.getCurrentPerson);
   }
   getCurrentPerson(){
     this.setState({
-      currentPerson: TodoStore.getCurrentPerson(),
+      currentPerson: PeopleStore.getCurrentPerson(),
       showGreet: true
     });
   }
   componentWillUnmount(){
-    TodoStore.removeListener("change", this.getCurrentPerson)
+    PeopleStore.removeListener("change", this.getCurrentPerson)
   }
   validDate(text) {
     var date = Date.parse(text);

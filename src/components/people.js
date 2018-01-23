@@ -3,30 +3,30 @@ Created by: @pdonaire1
 Ing. Pablo Alejandro González Donaire
 */
 import React, { Component } from 'react';
-import TodoStore from "../stores/TodoStore";
-import * as TodoActions from "../actions/GreetActions";
+import PeopleStore from "../stores/PeopleStore";
+import * as GreetActions from "../actions/GreetActions";
 
 class People extends Component {
   constructor(props){
     super(props);
       this.state = {
-        people: TodoStore.getAll(),
+        people: PeopleStore.getAll(),
       };
       this.getTodos = this.getTodos.bind(this);
   }
   componentWillMount(){
-    TodoStore.on("change", this.getTodos);
+    PeopleStore.on("change", this.getTodos);
   }
   getTodos(){
     this.setState({
-      todos: TodoStore.getAll(),
+      todos: PeopleStore.getAll(),
     });
   }
   componentWillUnmount(){
-    TodoStore.removeListener("change", this.getTodos)
+    PeopleStore.removeListener("change", this.getTodos)
   }
   renderGreet(person){
-    TodoActions.currentGreet(person);
+    GreetActions.currentGreet(person);
   }
   render() {
     const { people } = this.state;

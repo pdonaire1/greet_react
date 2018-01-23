@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 import dispatcher from "../dispatcher"
 import axios from 'axios';
 
-class TodoStore extends EventEmitter {
+class PeopleStore extends EventEmitter {
   constructor(){
     super();
     this.people = []
@@ -39,7 +39,7 @@ class TodoStore extends EventEmitter {
     this.emit("change");
   }
   handleActions(action){
-    // console.log("TodoStore recieve an action", action);
+    // console.log("PeopleStore recieve an action", action);
     switch(action.type){
       case "CREATE_GREET":{
         this.createGreet(action.value);
@@ -55,9 +55,9 @@ class TodoStore extends EventEmitter {
   }
 }
 
-const todoStore = new TodoStore;
-dispatcher.register(todoStore.handleActions.bind(todoStore));
-window.todoStore = todoStore;
+const peopleStore = new PeopleStore;
+dispatcher.register(peopleStore.handleActions.bind(peopleStore));
+// window.peopleStore = peopleStore;
 window.dispatcher = dispatcher;
-// todoStore.on("change", )
-export default todoStore;
+// peopleStore.on("change", )
+export default peopleStore;

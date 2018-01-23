@@ -11,7 +11,7 @@ import {
 } from 'react-bootstrap'
 import People from "./components/people"
 import PersonForm from "./components/person_form"
-import TodoStore from "./stores/TodoStore";
+import PeopleStore from "./stores/PeopleStore";
 
 import './App.css';
 import './assets/styles/base.scss';
@@ -23,11 +23,11 @@ class App extends Component {
     this.getCurrentPerson = this.getCurrentPerson.bind(this);
   }
   componentWillMount(){
-    TodoStore.on("change", this.getCurrentPerson);
+    PeopleStore.on("change", this.getCurrentPerson);
   }
   getCurrentPerson(){
     this.setState({
-      currentPerson: TodoStore.getCurrentPerson(),
+      currentPerson: PeopleStore.getCurrentPerson(),
       showGreet: true
     });
   }
