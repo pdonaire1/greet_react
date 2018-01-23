@@ -11,6 +11,7 @@ import {
 } from 'react-bootstrap'
 import TodoStore from "../stores/TodoStore";
 import * as GreetActions from "../actions/GreetActions";
+import Greet from "./greet";
 
 class PersonForm extends Component{
   constructor(props){
@@ -19,45 +20,63 @@ class PersonForm extends Component{
       countries: TodoStore.getCountries(),
       name: '',
       country: '',
-      birthYear: '',
+      birthDate: '',
       day: '',
       month: '',
       person_id: 0,
       future_year: '',
-      saved: false
+      showGreet: false,
+      currentPerson: null
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCountryChange = this.handleCountryChange.bind(this);
-    this.handleBirthYearChange = this.handleBirthYearChange.bind(this);
+    this.handleBirthDateChange = this.handleBirthDateChange.bind(this);
     this.renderCountrySelect = this.renderCountrySelect.bind(this);
     this.resetForm = this.resetForm.bind(this);
+    this.getCurrentPerson = this.getCurrentPerson.bind(this);
   }
 
   handleNameChange(event){
-    this.setState({name: event.target.value, saved: false});
+    this.setState({name: event.target.value, showGreet: false});
   }
   handleCountryChange(event){
-    this.setState({country: event.target.value, saved: false});
+    this.setState({country: event.target.value, showGreet: false});
   }
-  handleBirthYearChange(event){
-    this.setState({birthYear: event.target.value, saved: false});
+  handleBirthDateChange(event){
+    this.setState({birthDate: event.target.value, showGreet: false});
   }
   resetForm(){
     this.setState({
       name: '',
       country: '',
-      birthYear: ''
+      birthDate: ''
     });
   }
+  componentWillMount(){
+    TodoStore.on("change", this.getCurrentPerson);
+  }
+  getCurrentPerson(){
+    this.setState({
+      currentPerson: TodoStore.getCurrentPerson(),
+      showGreet: true
+    });
+  }
+  componentWillUnmount(){
+    TodoStore.removeListener("change", this.getCurrentPerson)
+  }
   createGreet(){
-    this.setState({saved: true, person_id: this.state.person_id + 1});
     var userData = {
       id: this.state.person_id,
       name: this.state.name,
       country: this.state.country,
-      birthYear: this.state.birthYear
+      birthDate: this.state.birthDate
     }
+    this.setState({
+      showGreet: true,
+      currentPerson: userData,
+      person_id: this.state.person_id + 1
+    });
     GreetActions.createGreet(userData);
     this.resetForm();
   }
@@ -93,27 +112,19 @@ class PersonForm extends Component{
         </FormGroup>
         {this.renderCountrySelect()}
 
-        <FormGroup controlId="birthYearId">
+        <FormGroup controlId="birthDateId">
           <ControlLabel>Año de nacimiento:</ControlLabel>
           <FormControl
             type="text"
-            value={this.state.birthYear}
+            value={this.state.birthDate}
             placeholder="Año de nacimiento"
-            onChange={this.handleBirthYearChange}
+            onChange={this.handleBirthDateChange}
             />
         </FormGroup>
 
         <Button bsStyle="primary" onClick={this.createGreet.bind(this)}>Saludar</Button>
         <br />
-        {
-          this.state.saved
-          &&
-          <p>
-          Hola {this.state.name} de {this.state.country}.
-          El día {this.state.day} del mes {this.state.month}
-          tendrás {this.state.future_year}
-          </p>
-        }
+        <Greet showGreet={this.state.showGreet} currentPerson={this.state.currentPerson}></Greet>
         <br />
       </div>
     )

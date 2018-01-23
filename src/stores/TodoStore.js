@@ -4,6 +4,7 @@ class TodoStore extends EventEmitter {
   constructor(){
     super();
     this.people = []
+    this.currentPerson = []
     this.countries = [
       {name: "Argentina", id: 1},
       {name: "Venezuela", id: 2},
@@ -14,13 +15,19 @@ class TodoStore extends EventEmitter {
   getAll(){
     return this.people;
   }
+  getCurrentPerson(){
+    return this.currentPerson;
+  }
   getCountries(){
     return this.countries;
   }
   createGreet(value){
-    console.log("text: ", value)
     const id = Date.now();
     this.people.push(value);
+    this.emit("change");
+  }
+  currentGreet(value){
+    this.currentPerson = value;
     this.emit("change");
   }
   handleActions(action){
@@ -31,6 +38,9 @@ class TodoStore extends EventEmitter {
       }
       case "GET_COUNTRIES": {
         this.getCountries()
+      }
+      case "CURRENT_GREET": {
+        this.currentGreet(action.value);
       }
 
     }

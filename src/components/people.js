@@ -15,7 +15,6 @@ class People extends Component {
       this.getTodos = this.getTodos.bind(this);
   }
   componentWillMount(){
-    console.log("ccc", this.state.countries)
     TodoStore.on("change", this.getTodos);
   }
   getTodos(){
@@ -26,20 +25,21 @@ class People extends Component {
   componentWillUnmount(){
     TodoStore.removeListener("change", this.getTodos)
   }
-
+  renderGreet(person){
+    TodoActions.currentGreet(person);
+  }
   render() {
     const { people } = this.state;
     const TodoComponents = people.map((person) => {
-      return <p key={person.id} className="people-option">
-        {person.name} - {person.country} - {person.birthYear}</p>
+      let boundPersonClick = this.renderGreet.bind(this, person);
+      return <p key={person.id} data={person} className="people-option"
+        onClick={boundPersonClick}>
+        {person.name} - {person.country} - {person.birthDate}</p>
     })
     return (
       <div className="people-box">
         <div style={{background: "#fff", borderRadius: "6px", height: "254px"}}>
           Visitantes Anteriores
-          <p className="people-option">Mariano - Argentina - 01/01/1984</p>
-          <p>Mariano - Argentina - 01/01/1984</p>
-          <p>Mariano - Argentina - 01/01/1984</p>
           <hr />
           {TodoComponents}
         </div>

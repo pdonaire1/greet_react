@@ -13,3 +13,10 @@ export function getCountries(id){
     id,
   });
 }
+
+export function currentGreet(person){
+  dispatcher.dispatch({
+    type: "CURRENT_GREET",
+    value: person,
+  });
+}

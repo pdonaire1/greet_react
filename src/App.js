@@ -19,7 +19,6 @@ class App extends Component {
     super(props);
     this.state = {name: "CHANGE"};
   }
-
   render() {
 
     return (
@@ -44,7 +43,7 @@ class App extends Component {
                 <PersonForm />
               </Col>
               <Col xs={12} md={6}>
-                <People></People>
+                <People ></People>
               </Col>
             </Row>
           </form>
