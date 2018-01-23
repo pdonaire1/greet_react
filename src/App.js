@@ -43,7 +43,11 @@ class App extends Component {
               <p className="App-intro">
               Ejercicio invite
               </p>
-              <p>Nombre: {this.state.currentPerson.name}</p>
+              {
+                this.state.currentPerson
+                &&
+                <p>Nombre: {this.state.currentPerson.name}</p>
+              }
             </Col>
           </Row>
           <form>

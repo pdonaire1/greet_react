@@ -42,6 +42,7 @@ class PersonForm extends Component{
 
   handleNameChange(event){
     this.setState({name: event.target.value, showGreet: false});
+    GreetActions.currentGreet();
   }
   handleCountryChange(event){
     this.setState({country: event.target.value, showGreet: false});

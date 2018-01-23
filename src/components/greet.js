@@ -46,6 +46,8 @@ class Greet extends Component{
         {
           this.props.showGreet
           &&
+          this.props.currentPerson
+          &&
           <p>
             Hola {this.props.currentPerson.name} de {this.props.currentPerson.country}.
             El día {this.state.calculatedDay} del mes {this.state.calculatedMonth}&nbsp;

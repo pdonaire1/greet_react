@@ -7,11 +7,7 @@ class PeopleStore extends EventEmitter {
     super();
     this.people = []
     this.currentPerson = []
-    this.countries = [
-      {name: "Argentina", id: 1},
-      {name: "Venezuela", id: 2},
-      {name: "USA", id: 3},
-    ]
+    this.countries = []
   }
 
   getAll(){
