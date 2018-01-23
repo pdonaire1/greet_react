@@ -5,7 +5,7 @@ Simple Greeting project created in ReactJS
 # Running enviroment
 1. Creating nvm enviroment
 ```
-nvm create node
+nvm install node
 ```
 
 2. Get into node enviroment
