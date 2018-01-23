@@ -1,8 +1,15 @@
 $blue : #286090;
 $white: #FFF;
+$red: #fbb2b2;
+$red-bold: #6b0c0c;
 
 .people-option:hover {
   background: $blue;
   color: $white;
   cursor: pointer;
+}
+
+.form-error {
+  background-color: $red;
+  color: $red-bold;
 }

@@ -1,5 +1,7 @@
 import { EventEmitter } from "events";
 import dispatcher from "../dispatcher"
+import axios from 'axios';
+
 class TodoStore extends EventEmitter {
   constructor(){
     super();
@@ -19,7 +21,13 @@ class TodoStore extends EventEmitter {
     return this.currentPerson;
   }
   getCountries(){
-    return this.countries;
+    // return this.countries;
+    return axios.get('https://restcountries.eu/rest/v2/all')
+      .then(function (response) {
+        return response.data
+      })
+      .catch(function (error) {
+      });
   }
   createGreet(value){
     const id = Date.now();
@@ -31,7 +39,7 @@ class TodoStore extends EventEmitter {
     this.emit("change");
   }
   handleActions(action){
-    console.log("TodoStore recieve an action", action);
+    // console.log("TodoStore recieve an action", action);
     switch(action.type){
       case "CREATE_GREET":{
         this.createGreet(action.value);

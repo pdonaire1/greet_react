@@ -11,22 +11,31 @@ import {
 } from 'react-bootstrap'
 import People from "./components/people"
 import PersonForm from "./components/person_form"
+import TodoStore from "./stores/TodoStore";
+
 import './App.css';
 import './assets/styles/base.scss';
 
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {name: "CHANGE"};
+    this.state = {currentPerson: ""};
+    this.getCurrentPerson = this.getCurrentPerson.bind(this);
+  }
+  componentWillMount(){
+    TodoStore.on("change", this.getCurrentPerson);
+  }
+  getCurrentPerson(){
+    this.setState({
+      currentPerson: TodoStore.getCurrentPerson(),
+      showGreet: true
+    });
   }
   render() {
 
     return (
       <div className="App">
-        {/*<header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Developed by @pdonaire1</h1>
-        </header>*/}
+
         <br />
         <Grid style={{background: "#ddd", borderRadius: "6px"}}>
           <Row>
@@ -34,7 +43,7 @@ class App extends Component {
               <p className="App-intro">
               Ejercicio invite
               </p>
-              <p>Nombre: {this.state.name}</p>
+              <p>Nombre: {this.state.currentPerson.name}</p>
             </Col>
           </Row>
           <form>
