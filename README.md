@@ -1,6 +1,6 @@
 # Created by: @pdonaire1
 
-Simple Greeting project created in ReactJS
+Simple Greeting project created in ReactJS. Node `version==5.5.1`
 
 # Running enviroment
 1. Creating nvm enviroment
